@@ -1,0 +1,54 @@
+{
+  "name": "@azodik/templates",
+  "version": "0.0.1",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/azodik/templates.git"
+  },
+  "type": "module",
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "require": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsc --outDir dist",
+    "changeset": "changeset",
+    "version": "changeset version",
+    "publish:changeset": "changeset publish",
+    "publish:npm": "npm publish --access public",
+    "clean": "rm -rf node_modules dist .react-email out",
+    "dev": "email dev --dir ./src/templates -p 3333",
+    "export": "email export --dir ./src/templates",
+    "next:build": "email build --dir ./src/templates"
+  },
+  "dependencies": {
+    "@azodik/schemas": "^0.0.3",
+    "@changesets/cli": "^2.29.6",
+    "@formatjs/intl": "^3.1.6",
+    "@react-email/components": "0.5.1",
+    "react": "19.1.1",
+    "react-dom": "19.1.1",
+    "react-icons": "^5.5.0",
+    "zod": "^4.1.5"
+  },
+  "devDependencies": {
+    "@react-email/preview-server": "4.2.8",
+    "@types/react": "^19.1.12",
+    "next": "^15.5.2",
+    "react-email": "^4.2.8",
+    "typescript": "^5.9.2"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}
