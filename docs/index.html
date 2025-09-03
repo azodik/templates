@@ -1,0 +1,1050 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@azodik/templates - Documentation</title>
+    <link rel="icon" href="favicon.ico" />
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu,
+          Cantarell, sans-serif;
+        line-height: 1.6;
+        color: #333;
+        background-color: #f8f9fa;
+      }
+
+      .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 20px;
+      }
+
+      .header {
+        background: linear-gradient(135deg, #eab566 0%, #eab566 100%);
+        color: white;
+        padding: 60px 20px;
+        text-align: center;
+        margin-bottom: 40px;
+        border-radius: 12px;
+      }
+
+      .header h1 {
+        font-size: 3rem;
+        margin-bottom: 20px;
+        font-weight: 700;
+      }
+
+      .header p {
+        font-size: 1.2rem;
+        opacity: 0.9;
+        max-width: 600px;
+        margin: 0 auto;
+      }
+
+      .nav {
+        background: white;
+        padding: 20px;
+        border-radius: 12px;
+        margin-bottom: 30px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      }
+
+      .nav ul {
+        list-style: none;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 20px;
+        justify-content: center;
+      }
+
+      .nav a {
+        text-decoration: none;
+        color: #eab566;
+        padding: 10px 20px;
+        border-radius: 25px;
+        background: #f8f9fa;
+        transition: all 0.3s ease;
+        font-weight: 500;
+      }
+
+      .nav a:hover {
+        background: #eab566;
+        color: white;
+        transform: translateY(-2px);
+      }
+
+      .section {
+        background: white;
+        padding: 30px;
+        border-radius: 12px;
+        margin-bottom: 30px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      }
+
+      .section h2 {
+        color: #2c3e50;
+        margin-bottom: 20px;
+        font-size: 2rem;
+        border-bottom: 3px solid #eab566;
+        padding-bottom: 10px;
+      }
+
+      .section h3 {
+        color: #34495e;
+        margin: 25px 0 15px 0;
+        font-size: 1.5rem;
+      }
+
+      .section h4 {
+        color: #503c2c;
+        margin: 20px 0 10px 0;
+        font-size: 1.2rem;
+      }
+
+      .code-block {
+        background: #2d3748;
+        color: #e2e8f0;
+        padding: 20px;
+        border-radius: 8px;
+        overflow-x: auto;
+        margin: 15px 0;
+        font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+        font-size: 14px;
+      }
+
+      .code-block pre {
+        margin: 0;
+      }
+
+      .template-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+        gap: 25px;
+        margin-top: 20px;
+      }
+
+      .template-card {
+        background: white;
+        border: 2px solid #e2e8f0;
+        border-radius: 12px;
+        padding: 25px;
+        transition: all 0.3s ease;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+      }
+
+      .template-card:hover {
+        border-color: #eab566;
+        transform: translateY(-5px);
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+      }
+
+      .template-card h4 {
+        color: #eab566;
+        margin-bottom: 15px;
+        font-size: 1.3rem;
+      }
+
+      .template-card .description {
+        color: #666;
+        margin-bottom: 20px;
+        line-height: 1.5;
+      }
+
+      .template-card .use-case {
+        background: #f7fafc;
+        padding: 15px;
+        border-radius: 8px;
+        margin-bottom: 15px;
+      }
+
+      .template-card .use-case h5 {
+        color: #2d3748;
+        margin-bottom: 8px;
+        font-size: 1rem;
+      }
+
+      .template-card .use-case p {
+        color: #4a5568;
+        font-size: 0.9rem;
+      }
+
+      .template-card .variables {
+        background: #edf2f7;
+        padding: 15px;
+        border-radius: 8px;
+      }
+
+      .template-card .variables h5 {
+        color: #2d3748;
+        margin-bottom: 8px;
+        font-size: 1rem;
+      }
+
+      .template-card .variables ul {
+        list-style: none;
+        padding: 0;
+      }
+
+      .template-card .variables li {
+        background: white;
+        padding: 8px 12px;
+        margin: 5px 0;
+        border-radius: 6px;
+        border-left: 3px solid #667eea;
+        font-size: 0.9rem;
+        font-family: monospace;
+      }
+
+      .feature-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 20px;
+        margin: 20px 0;
+      }
+
+      .feature-item {
+        text-align: center;
+        padding: 20px;
+        background: #f8f9fa;
+        border-radius: 8px;
+        border: 1px solid #e9ecef;
+      }
+
+      .feature-item .icon {
+        font-size: 2.5rem;
+        margin-bottom: 15px;
+      }
+
+      .feature-item h4 {
+        color: #2c3e50;
+        margin-bottom: 10px;
+      }
+
+      .feature-item p {
+        color: #666;
+        font-size: 0.9rem;
+      }
+
+      .language-badge {
+        display: inline-block;
+        background: #667eea;
+        color: white;
+        padding: 4px 12px;
+        border-radius: 20px;
+        font-size: 0.8rem;
+        margin: 2px;
+      }
+
+      .required {
+        background: #e53e3e;
+      }
+
+      .optional {
+        background: #38a169;
+      }
+
+      .table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 20px 0;
+        background: white;
+        border-radius: 8px;
+        overflow: hidden;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      }
+
+      .table th,
+      .table td {
+        padding: 15px;
+        text-align: left;
+        border-bottom: 1px solid #e2e8f0;
+      }
+
+      .table th {
+        background: #667eea;
+        color: white;
+        font-weight: 600;
+      }
+
+      .table tr:hover {
+        background: #f7fafc;
+      }
+
+      .footer {
+        text-align: center;
+        padding: 40px 20px;
+        color: #666;
+        border-top: 1px solid #e2e8f0;
+        margin-top: 40px;
+      }
+
+      @media (max-width: 768px) {
+        .header h1 {
+          font-size: 2rem;
+        }
+
+        .nav ul {
+          flex-direction: column;
+          align-items: center;
+        }
+
+        .template-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .feature-grid {
+          grid-template-columns: 1fr;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="header">
+        <h1>@azodik/templates</h1>
+        <p>
+          A comprehensive collection of React Email templates for the Azodik platform, featuring
+          internationalization support and modern design patterns.
+        </p>
+      </div>
+
+      <nav class="nav">
+        <ul>
+          <li><a href="#introduction">Introduction</a></li>
+          <li><a href="#features">Features</a></li>
+          <li><a href="#installation">Installation</a></li>
+          <li><a href="#quick-start">Quick Start</a></li>
+          <li><a href="#templates">Templates</a></li>
+          <li><a href="#api-reference">API Reference</a></li>
+          <li><a href="#app-info">AppInfo Schema</a></li>
+          <li><a href="#examples">Examples</a></li>
+        </ul>
+      </nav>
+
+      <section id="introduction" class="section">
+        <h2>Introduction</h2>
+        <p>
+          @azodik/templates is a powerful React Email template library designed to simplify email
+          creation for modern applications. Built with TypeScript and Zod validation, it provides a
+          robust foundation for creating beautiful, responsive emails that work across all email
+          clients.
+        </p>
+
+        <p>
+          The library includes pre-built templates for common use cases like user onboarding,
+          security notifications, and marketing communications. Each template is fully customizable
+          and supports multiple languages out of the box.
+        </p>
+      </section>
+
+      <section id="features" class="section">
+        <h2>Features</h2>
+        <div class="feature-grid">
+          <div class="feature-item">
+            <div class="icon">🎨</div>
+            <h4>Modern Design</h4>
+            <p>Beautiful, responsive email templates built with React Email</p>
+          </div>
+          <div class="feature-item">
+            <div class="icon">🌍</div>
+            <h4>Internationalization</h4>
+            <p>Support for English, Hindi, Spanish, French, and German</p>
+          </div>
+          <div class="feature-item">
+            <div class="icon">🔧</div>
+            <h4>TypeScript</h4>
+            <p>Fully typed with Zod schemas for validation</p>
+          </div>
+          <div class="feature-item">
+            <div class="icon">📱</div>
+            <h4>Responsive</h4>
+            <p>Mobile-first approach for all email clients</p>
+          </div>
+          <div class="feature-item">
+            <div class="icon">🎯</div>
+            <h4>Template Variety</h4>
+            <p>Covers common use cases and business scenarios</p>
+          </div>
+          <div class="feature-item">
+            <div class="icon">🚀</div>
+            <h4>Easy Integration</h4>
+            <p>Simple API for rendering templates with variables</p>
+          </div>
+        </div>
+      </section>
+
+      <section id="installation" class="section">
+        <h2>Installation</h2>
+        <p>Install the package using your preferred package manager:</p>
+
+        <div class="code-block">
+          <pre>
+# Using npm
+npm install @azodik/templates
+
+# Using yarn
+yarn add @azodik/templates
+
+# Using pnpm
+pnpm add @azodik/templates</pre
+          >
+        </div>
+
+        <h3>Peer Dependencies</h3>
+        <p>This package requires the following peer dependencies:</p>
+        <ul>
+          <li>React 18+</li>
+          <li>@react-email/components</li>
+          <li>Zod (for schema validation)</li>
+        </ul>
+      </section>
+
+      <section id="quick-start" class="section">
+        <h2>Quick Start</h2>
+        <p>Here's a simple example of how to use the templates:</p>
+
+        <div class="code-block">
+          <pre>
+import { getTemplate, getSubject } from '@azodik/templates';
+
+// Render a welcome email
+const html = await getTemplate({
+  template: 'welcome',
+  variables: {
+    name: 'John Doe',
+    url: 'https://example.com',
+    plan: 'Pro',
+    region: 'US',
+    nextBillingDate: '2024-01-15'
+  },
+  lang: 'en',
+  appInfo: {
+    name: 'MyApp',
+    logo: 'https://example.com/logo.png',
+    privacyPolicyUrl: 'https://example.com/privacy',
+    termsOfServiceUrl: 'https://example.com/terms',
+    cookiePolicyUrl: 'https://example.com/cookies',
+    address: '123 Main St',
+    city: 'New York',
+    state: 'NY',
+    zip: '10001',
+    country: 'USA'
+  }
+});
+
+// Get the email subject
+const subject = getSubject('welcome', 'en');</pre
+          >
+        </div>
+      </section>
+
+      <section id="templates" class="section">
+        <h2>Available Templates</h2>
+        <p>
+          Below is a comprehensive overview of all available templates, their use cases, and
+          required data:
+        </p>
+
+        <div class="template-grid">
+          <div class="template-card">
+            <h4>Welcome Email</h4>
+            <div class="description">
+              Welcome new users to your platform with a personalized onboarding experience.
+            </div>
+
+            <div class="use-case">
+              <h5>Use Case</h5>
+              <p>User registration, account creation, subscription activation</p>
+            </div>
+
+            <div class="variables">
+              <h5>Required Variables</h5>
+              <ul>
+                <li><span class="language-badge required">name</span> User's full name</li>
+                <li>
+                  <span class="language-badge required">url</span> Action URL (e.g., dashboard link)
+                </li>
+                <li><span class="language-badge required">plan</span> Subscription plan name</li>
+                <li><span class="language-badge required">region</span> User's region/country</li>
+                <li>
+                  <span class="language-badge required">nextBillingDate</span> Next billing date
+                </li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="template-card">
+            <h4>Verify Email</h4>
+            <div class="description">
+              Email verification template for confirming user email addresses.
+            </div>
+
+            <div class="use-case">
+              <h5>Use Case</h5>
+              <p>Email verification, account activation, security confirmation</p>
+            </div>
+
+            <div class="variables">
+              <h5>Required Variables</h5>
+              <ul>
+                <li><span class="language-badge required">name</span> User's full name</li>
+                <li><span class="language-badge required">url</span> Verification link</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="template-card">
+            <h4>Password Reset</h4>
+            <div class="description">
+              Secure password reset request template with action button.
+            </div>
+
+            <div class="use-case">
+              <h5>Use Case</h5>
+              <p>Forgot password, password recovery, security reset</p>
+            </div>
+
+            <div class="variables">
+              <h5>Required Variables</h5>
+              <ul>
+                <li><span class="language-badge required">name</span> User's full name</li>
+                <li><span class="language-badge required">url</span> Password reset link</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="template-card">
+            <h4>Password Changed</h4>
+            <div class="description">
+              Confirmation email when a user's password is successfully changed.
+            </div>
+
+            <div class="use-case">
+              <h5>Use Case</h5>
+              <p>Password change confirmation, security notification</p>
+            </div>
+
+            <div class="variables">
+              <h5>Required Variables</h5>
+              <ul>
+                <li><span class="language-badge required">name</span> User's full name</li>
+                <li><span class="language-badge required">url</span> Account settings URL</li>
+                <li>
+                  <span class="language-badge required">updateTime</span> When password was changed
+                </li>
+                <li>
+                  <span class="language-badge required">ipAddress</span> IP address of the change
+                </li>
+                <li><span class="language-badge required">userAgent</span> Browser/device info</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="template-card">
+            <h4>Profile Updated</h4>
+            <div class="description">
+              Notification email when user profile information is modified.
+            </div>
+
+            <div class="use-case">
+              <h5>Use Case</h5>
+              <p>Profile change confirmation, account update notification</p>
+            </div>
+
+            <div class="variables">
+              <h5>Required Variables</h5>
+              <ul>
+                <li><span class="language-badge required">name</span> User's full name</li>
+                <li><span class="language-badge required">url</span> Profile settings URL</li>
+                <li>
+                  <span class="language-badge required">updateTime</span> When profile was updated
+                </li>
+                <li>
+                  <span class="language-badge required">ipAddress</span> IP address of the update
+                </li>
+                <li><span class="language-badge required">userAgent</span> Browser/device info</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="template-card">
+            <h4>Login Alert</h4>
+            <div class="description">
+              Security notification when a new login is detected on the user's account.
+            </div>
+
+            <div class="use-case">
+              <h5>Use Case</h5>
+              <p>New login detection, security alerts, suspicious activity</p>
+            </div>
+
+            <div class="variables">
+              <h5>Required Variables</h5>
+              <ul>
+                <li><span class="language-badge required">name</span> User's full name</li>
+                <li><span class="language-badge required">url</span> Account security URL</li>
+                <li><span class="language-badge required">loginTime</span> When login occurred</li>
+                <li><span class="language-badge required">ipAddress</span> IP address of login</li>
+                <li><span class="language-badge required">userAgent</span> Browser/device info</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="template-card">
+            <h4>Email Changed</h4>
+            <div class="description">
+              Notification when a user's email address is successfully updated.
+            </div>
+
+            <div class="use-case">
+              <h5>Use Case</h5>
+              <p>Email change confirmation, account update notification</p>
+            </div>
+
+            <div class="variables">
+              <h5>Required Variables</h5>
+              <ul>
+                <li><span class="language-badge required">name</span> User's full name</li>
+                <li><span class="language-badge required">url</span> Account settings URL</li>
+                <li>
+                  <span class="language-badge required">updateTime</span> When email was changed
+                </li>
+                <li>
+                  <span class="language-badge required">ipAddress</span> IP address of the change
+                </li>
+                <li><span class="language-badge required">location</span> Geographic location</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="template-card">
+            <h4>Phone Changed</h4>
+            <div class="description">
+              Notification when a user's phone number is successfully updated.
+            </div>
+
+            <div class="use-case">
+              <h5>Use Case</h5>
+              <p>Phone number change confirmation, account update notification</p>
+            </div>
+
+            <div class="variables">
+              <h5>Required Variables</h5>
+              <ul>
+                <li><span class="language-badge required">name</span> User's full name</li>
+                <li><span class="language-badge required">url</span> Account settings URL</li>
+                <li>
+                  <span class="language-badge required">updateTime</span> When phone was changed
+                </li>
+                <li>
+                  <span class="language-badge required">ipAddress</span> IP address of the change
+                </li>
+                <li><span class="language-badge required">location</span> Geographic location</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="template-card">
+            <h4>Marketing Newsletter</h4>
+            <div class="description">
+              Professional newsletter template with content sections and unsubscribe options.
+            </div>
+
+            <div class="use-case">
+              <h5>Use Case</h5>
+              <p>Newsletter distribution, marketing campaigns, product updates</p>
+            </div>
+
+            <div class="variables">
+              <h5>Required Variables</h5>
+              <ul>
+                <li><span class="language-badge required">name</span> User's full name</li>
+                <li><span class="language-badge required">userEmail</span> User's email address</li>
+                <li>
+                  <span class="language-badge required">newsletterLink</span> Main newsletter
+                  content URL
+                </li>
+                <li>
+                  <span class="language-badge required">unsubscribeLink</span> Unsubscribe URL
+                </li>
+                <li>
+                  <span class="language-badge required">managePreferencesLink</span> Email
+                  preferences URL
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="api-reference" class="section">
+        <h2>API Reference</h2>
+
+        <h3>getTemplate(opts: GetTemplate)</h3>
+        <p>Renders an email template with the provided options.</p>
+
+        <h4>Parameters:</h4>
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Parameter</th>
+              <th>Type</th>
+              <th>Required</th>
+              <th>Description</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>template</td>
+              <td>EmailTemplate</td>
+              <td>Yes</td>
+              <td>The template type to render</td>
+            </tr>
+            <tr>
+              <td>variables</td>
+              <td>TemplateVariables</td>
+              <td>Yes</td>
+              <td>Template-specific variables</td>
+            </tr>
+            <tr>
+              <td>lang</td>
+              <td>TemplateLanguage</td>
+              <td>No</td>
+              <td>Language code (defaults to 'en')</td>
+            </tr>
+            <tr>
+              <td>appInfo</td>
+              <td>AppInfo</td>
+              <td>Yes</td>
+              <td>Application information object</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h4>Returns:</h4>
+        <p>Promise&lt;string&gt; - HTML string of the rendered email</p>
+
+        <h3>getSubject(template: EmailTemplate, lang: TemplateLanguage)</h3>
+        <p>Gets the localized subject line for a template.</p>
+
+        <h4>Parameters:</h4>
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Parameter</th>
+              <th>Type</th>
+              <th>Required</th>
+              <th>Description</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>template</td>
+              <td>EmailTemplate</td>
+              <td>Yes</td>
+              <td>The template type</td>
+            </tr>
+            <tr>
+              <td>lang</td>
+              <td>TemplateLanguage</td>
+              <td>No</td>
+              <td>Language code (defaults to 'en')</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h4>Returns:</h4>
+        <p>string - Localized subject line</p>
+      </section>
+
+      <section id="app-info" class="section">
+        <h2>AppInfo Schema</h2>
+        <p>
+          The <code>appInfo</code> object contains comprehensive information about your application
+          for branding and compliance purposes.
+        </p>
+
+        <h3>Required Fields</h3>
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Field</th>
+              <th>Type</th>
+              <th>Description</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>name</td>
+              <td>string</td>
+              <td>Your application name</td>
+            </tr>
+            <tr>
+              <td>logo</td>
+              <td>string (URL)</td>
+              <td>URL to your application logo</td>
+            </tr>
+            <tr>
+              <td>privacyPolicyUrl</td>
+              <td>string (URL)</td>
+              <td>URL to your privacy policy</td>
+            </tr>
+            <tr>
+              <td>termsOfServiceUrl</td>
+              <td>string (URL)</td>
+              <td>URL to your terms of service</td>
+            </tr>
+            <tr>
+              <td>cookiePolicyUrl</td>
+              <td>string (URL)</td>
+              <td>URL to your cookie policy</td>
+            </tr>
+            <tr>
+              <td>address</td>
+              <td>string</td>
+              <td>Street address</td>
+            </tr>
+            <tr>
+              <td>city</td>
+              <td>string</td>
+              <td>City name</td>
+            </tr>
+            <tr>
+              <td>state</td>
+              <td>string</td>
+              <td>State/province</td>
+            </tr>
+            <tr>
+              <td>country</td>
+              <td>string</td>
+              <td>Country name</td>
+            </tr>
+            <tr>
+              <td>zip</td>
+              <td>string</td>
+              <td>ZIP/postal code</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h3>Optional Fields</h3>
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Field</th>
+              <th>Type</th>
+              <th>Default</th>
+              <th>Description</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>primaryColor</td>
+              <td>string</td>
+              <td>-</td>
+              <td>Primary brand color (hex code)</td>
+            </tr>
+            <tr>
+              <td>secondaryColor</td>
+              <td>string</td>
+              <td>-</td>
+              <td>Secondary brand color (hex code)</td>
+            </tr>
+            <tr>
+              <td>logoWidth</td>
+              <td>number</td>
+              <td>100</td>
+              <td>Logo width in pixels</td>
+            </tr>
+            <tr>
+              <td>logoHeight</td>
+              <td>number</td>
+              <td>100</td>
+              <td>Logo height in pixels</td>
+            </tr>
+            <tr>
+              <td>language</td>
+              <td>string</td>
+              <td>'en'</td>
+              <td>Default language code</td>
+            </tr>
+            <tr>
+              <td>theme</td>
+              <td>string</td>
+              <td>'light'</td>
+              <td>Theme preference</td>
+            </tr>
+            <tr>
+              <td>supportUrl</td>
+              <td>string (URL)</td>
+              <td>-</td>
+              <td>Customer support URL</td>
+            </tr>
+            <tr>
+              <td>githubUrl</td>
+              <td>string (URL)</td>
+              <td>-</td>
+              <td>GitHub repository URL</td>
+            </tr>
+            <tr>
+              <td>xUrl</td>
+              <td>string (URL)</td>
+              <td>-</td>
+              <td>X (Twitter) profile URL</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="code-block">
+          <pre>
+// Example AppInfo object
+const appInfo = {
+  name: 'MyAwesomeApp',
+  logo: 'https://example.com/logo.png',
+  privacyPolicyUrl: 'https://example.com/privacy',
+  termsOfServiceUrl: 'https://example.com/terms',
+  cookiePolicyUrl: 'https://example.com/cookies',
+  address: '123 Innovation Street',
+  city: 'Tech City',
+  state: 'CA',
+  country: 'USA',
+  zip: '90210',
+  primaryColor: '#667eea',
+  secondaryColor: '#764ba2',
+  logoWidth: 120,
+  logoHeight: 60,
+  supportUrl: 'https://example.com/support',
+  githubUrl: 'https://github.com/myapp',
+  xUrl: 'https://x.com/myapp'
+};</pre
+          >
+        </div>
+
+        <p>
+          <strong>Note:</strong> The <code>fullAddress</code> field is automatically generated by
+          combining address components.
+        </p>
+      </section>
+
+      <section id="examples" class="section">
+        <h2>Usage Examples</h2>
+
+        <h3>Welcome Email Example</h3>
+        <div class="code-block">
+          <pre>
+import { getTemplate } from '@azodik/templates';
+
+const welcomeEmail = await getTemplate({
+  template: 'welcome',
+  variables: {
+    name: 'Alice Johnson',
+    url: 'https://myapp.com/dashboard',
+    plan: 'Enterprise',
+    region: 'Europe',
+    nextBillingDate: '2024-02-15'
+  },
+  lang: 'en',
+  appInfo: {
+    name: 'MyApp',
+    logo: 'https://myapp.com/logo.png',
+    privacyPolicyUrl: 'https://myapp.com/privacy',
+    termsOfServiceUrl: 'https://myapp.com/terms',
+    cookiePolicyUrl: 'https://myapp.com/cookies',
+    address: '456 Business Ave',
+    city: 'London',
+    state: 'England',
+    country: 'UK',
+    zip: 'SW1A 1AA'
+  }
+});</pre
+          >
+        </div>
+
+        <h3>Security Alert Example</h3>
+        <div class="code-block">
+          <pre>
+import { getTemplate } from '@azodik/templates';
+
+const loginAlert = await getTemplate({
+  template: 'login-alert',
+  variables: {
+    name: 'Bob Smith',
+    url: 'https://myapp.com/security',
+    loginTime: '2024-01-15T10:30:00Z',
+    ipAddress: '192.168.1.100',
+    userAgent: 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36'
+  },
+  lang: 'en',
+  appInfo: {
+    name: 'MyApp',
+    logo: 'https://myapp.com/logo.png',
+    privacyPolicyUrl: 'https://myapp.com/privacy',
+    termsOfServiceUrl: 'https://myapp.com/terms',
+    cookiePolicyUrl: 'https://myapp.com/cookies',
+    address: '456 Business Ave',
+    city: 'London',
+    state: 'England',
+    country: 'UK',
+    zip: 'SW1A 1AA'
+  }
+});</pre
+          >
+        </div>
+
+        <h3>Newsletter Example</h3>
+        <div class="code-block">
+          <pre>
+import { getTemplate } from '@azodik/templates';
+
+const newsletter = await getTemplate({
+  template: 'marketing-newsletter',
+  variables: {
+    name: 'Carol Davis',
+    userEmail: 'carol@example.com',
+    newsletterLink: 'https://myapp.com/newsletter/123',
+    unsubscribeLink: 'https://myapp.com/unsubscribe?token=abc123',
+    managePreferencesLink: 'https://myapp.com/preferences'
+  },
+  lang: 'en',
+  appInfo: {
+    name: 'MyApp',
+    logo: 'https://myapp.com/logo.png',
+    privacyPolicyUrl: 'https://myapp.com/privacy',
+    termsOfServiceUrl: 'https://myapp.com/terms',
+    cookiePolicyUrl: 'https://myapp.com/cookies',
+    address: '456 Business Ave',
+    city: 'London',
+    state: 'England',
+    country: 'UK',
+    zip: 'SW1A 1AA'
+  }
+});</pre
+          >
+        </div>
+      </section>
+
+      <div class="footer">
+        <p>
+          <a
+            href="https://azodik.com"
+            style="color: #eab566; text-decoration: none; font-weight: 500"
+            >Azodik</a
+          >
+          <span style="margin: 0 12px; color: #cbd5e0">•</span>
+          <a
+            href="https://github.com/azodik"
+            style="color: #eab566; text-decoration: none; font-weight: 500"
+            >GitHub</a
+          >
+        </p>
+      </div>
+    </div>
+  </body>
+</html>
