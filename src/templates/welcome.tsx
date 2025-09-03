@@ -15,10 +15,10 @@ import { getIntl } from '../i18n';
 import { WelcomeEmailProps } from '../schemas';
 
 export const WelcomeEmail = (props: WelcomeEmailProps) => {
-  const { appInfo, name, url, plan, region, nextBillingDate } = props;
-  const intl = getIntl(appInfo?.language || 'en');
+  const { appInfo, name, url, plan, region, nextBillingDate } = props.payload || {};
+  const intl = getIntl(props.lang || 'en');
   return (
-    <Html lang={appInfo?.language || 'en'}>
+    <Html lang={props.lang || 'en'}>
       <Head />
       <Preview>{intl.formatMessage({ id: 'welcome.preview' }, { appName: appInfo?.name })}</Preview>
       <Body

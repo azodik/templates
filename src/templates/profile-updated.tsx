@@ -16,11 +16,11 @@ import { getIntl } from '../i18n';
 import { ProfileUpdatedEmailProps } from '../schemas';
 
 export const ProfileUpdatedEmail = (props: ProfileUpdatedEmailProps) => {
-  const { appInfo, name, updateTime, ipAddress, userAgent, url } = props;
-  const intl = getIntl(appInfo?.language || 'en');
+  const { appInfo, name, updateTime, ipAddress, userAgent, url } = props.payload || {};
+  const intl = getIntl(props.lang || 'en');
 
   return (
-    <Html>
+    <Html lang={props.lang || 'en'}>
       <Head />
       <Preview>
         {intl.formatMessage({ id: 'profileUpdated.preview' }, { appName: appInfo?.name })}

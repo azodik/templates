@@ -15,10 +15,10 @@ import { getIntl } from '../i18n';
 import { PasswordResetEmailProps } from '../schemas';
 
 export const PasswordResetEmail = (props: PasswordResetEmailProps) => {
-  const { appInfo, name, url } = props;
-  const intl = getIntl(appInfo?.language || 'en');
+  const { appInfo, name, url } = props.payload || {};
+  const intl = getIntl(props.lang || 'en');
   return (
-    <Html>
+    <Html lang={props.lang || 'en'}>
       <Head />
       <Preview>
         {intl.formatMessage({ id: 'passwordReset.preview' }, { appName: appInfo?.name })}

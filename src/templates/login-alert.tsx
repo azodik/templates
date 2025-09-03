@@ -15,11 +15,11 @@ import { getIntl } from '../i18n';
 import { LoginAlertEmailProps } from '../schemas';
 
 export const LoginAlertEmail = (props: LoginAlertEmailProps) => {
-  const { appInfo, name, loginTime, ipAddress, userAgent } = props;
-  const intl = getIntl(appInfo?.language || 'en');
+  const { appInfo, name, loginTime, ipAddress, userAgent } = props.payload || {};
+  const intl = getIntl(props.lang || 'en');
 
   return (
-    <Html>
+    <Html lang={props.lang || 'en'}>
       <Head />
       <Preview>
         {intl.formatMessage({ id: 'loginAlert.preview' }, { appName: appInfo?.name })}

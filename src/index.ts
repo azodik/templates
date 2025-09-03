@@ -29,6 +29,7 @@ export const getSubject = (template: EmailTemplate, lang: TemplateLanguage) => {
       return intl.formatMessage({ id: 'phoneChanged.subject' });
     case 'login-alert':
       return intl.formatMessage({ id: 'loginAlert.subject' });
+
     default:
       return template;
   }
@@ -49,90 +50,114 @@ export const getTemplate = async (opts: GetTemplate) => {
     case 'welcome':
       return await render(
         WelcomeEmail({
-          name: variables?.name || 'John Doe',
-          url: variables?.url,
-          appInfo: transformedAppInfo,
-          plan: variables?.plan,
-          region: variables?.region,
-          nextBillingDate: variables?.nextBillingDate,
+          payload: {
+            name: variables?.name || 'John Doe',
+            url: variables?.url,
+            appInfo: transformedAppInfo,
+            plan: variables?.plan,
+            region: variables?.region,
+            nextBillingDate: variables?.nextBillingDate,
+          },
+          lang: lang,
         }),
       );
+
     case 'reset-password':
       return await render(
         PasswordResetEmail({
-          name: variables?.name,
-          url: variables?.url,
-          appInfo: transformedAppInfo,
+          payload: {
+            name: variables?.name,
+            url: variables?.url,
+            appInfo: transformedAppInfo,
+          },
+          lang: lang,
         }),
       );
+
     case 'password-changed':
       return await render(
         PasswordChangedEmail({
-          name: variables?.name,
-          url: variables?.url,
-          appInfo: transformedAppInfo,
-          updateTime: variables?.updateTime,
-          ipAddress: variables?.ipAddress,
-          userAgent: variables?.userAgent,
+          payload: {
+            name: variables?.name,
+            url: variables?.url,
+            appInfo: transformedAppInfo,
+            updateTime: variables?.updateTime,
+            ipAddress: variables?.ipAddress,
+            userAgent: variables?.userAgent,
+          },
+          lang: lang,
         }),
       );
+
     case 'verify-email':
       return await render(
         VerifyEmail({
-          name: variables?.name,
-          url: variables?.url,
-          appInfo: transformedAppInfo,
+          payload: {
+            name: variables?.name,
+            url: variables?.url,
+            appInfo: transformedAppInfo,
+          },
+          lang: lang,
         }),
       );
 
     case 'profile-updated':
       return await render(
         ProfileUpdatedEmail({
-          name: variables?.name,
-          url: variables?.url,
-          appInfo: transformedAppInfo,
-          updateTime: variables?.updateTime,
-          ipAddress: variables?.ipAddress,
-          userAgent: variables?.userAgent,
+          payload: {
+            name: variables?.name,
+            url: variables?.url,
+            appInfo: transformedAppInfo,
+            updateTime: variables?.updateTime,
+            ipAddress: variables?.ipAddress,
+            userAgent: variables?.userAgent,
+          },
+          lang: lang,
         }),
       );
+
     case 'login-alert':
       return await render(
         LoginAlertEmail({
-          name: variables?.name,
-          url: variables?.url,
-          appInfo: transformedAppInfo,
-          loginTime: variables?.loginTime,
-          ipAddress: variables?.ipAddress,
-          userAgent: variables?.userAgent,
+          payload: {
+            name: variables?.name,
+            url: variables?.url,
+            appInfo: transformedAppInfo,
+            loginTime: variables?.loginTime,
+            ipAddress: variables?.ipAddress,
+            userAgent: variables?.userAgent,
+          },
+          lang: lang,
         }),
       );
 
     case 'email-changed':
       return await render(
         EmailChangedEmail({
-          name: variables?.name,
+          payload: {
+            name: variables?.name,
+            url: variables?.url,
+            appInfo: transformedAppInfo,
+            updateTime: variables?.updateTime,
+            ipAddress: variables?.ipAddress,
+            location: variables?.location,
+          },
           lang: lang,
-          oldEmail: variables?.oldEmail,
-          newEmail: variables?.newEmail,
-          changeTime: variables?.changeTime,
-          ipAddress: variables?.ipAddress,
-          location: variables?.location,
-          accountSettingsUrl: variables?.accountSettingsUrl,
         }),
       );
 
     case 'phone-changed':
       return await render(
         PhoneChangedEmail({
-          name: variables?.name,
+          payload: {
+            name: variables?.name,
+            url: variables?.url,
+            appInfo: transformedAppInfo,
+            updateTime: variables?.updateTime,
+            ipAddress: variables?.ipAddress,
+            location: variables?.location,
+          },
           lang: lang,
-          oldPhone: variables?.oldPhone,
-          newPhone: variables?.newPhone,
-          changeTime: variables?.changeTime,
-          ipAddress: variables?.ipAddress,
-          location: variables?.location,
-          accountSettingsUrl: variables?.accountSettingsUrl,
         }),
       );
 

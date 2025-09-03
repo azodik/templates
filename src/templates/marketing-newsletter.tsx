@@ -11,24 +11,12 @@ import {
 import { EmailHeader } from '../components/EmailHeader';
 import { EmailFooter } from '../components/EmailFooter';
 import { EmailButton } from '../components/EmailButton';
+import { MarketingNewsletterProps } from '../schemas';
 
-interface MarketingNewsletterProps {
-  name?: string;
-  userEmail?: string;
-  newsletterLink?: string;
-  unsubscribeLink?: string;
-  managePreferencesLink?: string;
-}
-
-export const MarketingNewsletter = ({
-  name = 'User',
-  userEmail = 'user@example.com',
-  newsletterLink = 'https://authzio.com/newsletter',
-  unsubscribeLink = 'https://authzio.com/unsubscribe',
-  managePreferencesLink = 'https://authzio.com/preferences',
-}: MarketingNewsletterProps) => {
+export const MarketingNewsletter = (props: MarketingNewsletterProps) => {
+  const { appInfo, userEmail, newsletterLink } = props.payload || {};
   return (
-    <Html>
+    <Html lang={props.lang || 'en'}>
       <Head />
       <Preview>AuthZio Newsletter - Latest Updates & Features</Preview>
       <Body
@@ -47,7 +35,7 @@ export const MarketingNewsletter = ({
             backgroundColor: '#ffffff',
           }}
         >
-          {/* <EmailHeader /> */}
+          <EmailHeader logo={appInfo?.logo} appName={appInfo?.name} />
 
           <Section style={{ textAlign: 'center', marginBottom: '28px' }}>
             <Heading
@@ -82,7 +70,7 @@ export const MarketingNewsletter = ({
                 margin: '0 0 12px 0',
               }}
             >
-              Hello {name},
+              Hello {userEmail},
             </Text>
             <Text
               style={{
@@ -245,7 +233,7 @@ export const MarketingNewsletter = ({
           <Section style={{ textAlign: 'center', marginBottom: '28px' }}>
             <EmailButton
               title="Read Full Newsletter"
-              link={newsletterLink}
+              link={newsletterLink || '#'}
               variant="primary"
               size="medium"
             />
@@ -266,11 +254,7 @@ export const MarketingNewsletter = ({
             </Text>
           </Section>
 
-          {/* <EmailFooter
-            isMarketing={true}
-            unsubscribeLink={unsubscribeLink}
-            managePreferencesLink={managePreferencesLink}
-          /> */}
+          <EmailFooter {...appInfo!} />
         </Container>
       </Body>
     </Html>

@@ -15,10 +15,10 @@ import { getIntl } from '../i18n';
 import { VerifyEmailProps } from '../schemas';
 
 export const VerifyEmail = (props: VerifyEmailProps) => {
-  const { appInfo, name, url } = props;
-  const intl = getIntl(appInfo?.language || 'en');
+  const { appInfo, name, url } = props.payload || {};
+  const intl = getIntl(props.lang || 'en');
   return (
-    <Html>
+    <Html lang={props.lang || 'en'}>
       <Head />
       <Preview>
         {intl.formatMessage({ id: 'verifyEmail.preview' }, { appName: appInfo?.name })}

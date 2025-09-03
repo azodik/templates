@@ -12,32 +12,14 @@ import { EmailHeader } from '../components/EmailHeader';
 import { EmailFooter } from '../components/EmailFooter';
 import { EmailButton } from '../components/EmailButton';
 import { getIntl } from '../i18n';
+import { PhoneChangedEmailProps } from '../schemas';
 
-interface PhoneChangedEmailProps {
-  name?: string;
-  oldPhone?: string;
-  newPhone?: string;
-  changeTime?: string;
-  ipAddress?: string;
-  location?: string;
-  accountSettingsUrl?: string;
-  lang?: string;
-}
-
-export const PhoneChangedEmail = ({
-  name = 'User',
-  oldPhone = '+1 (555) 123-4567',
-  newPhone = '+1 (555) 987-6543',
-  changeTime = new Date().toLocaleString(),
-  ipAddress = '192.168.1.1',
-  location = 'New York, NY, United States',
-  accountSettingsUrl = 'https://in.authzio.com/settings/security',
-  lang = 'en',
-}: PhoneChangedEmailProps) => {
-  const intl = getIntl(lang);
+export const PhoneChangedEmail = (props: PhoneChangedEmailProps) => {
+  const { appInfo, name, updateTime, ipAddress, location, url } = props.payload || {};
+  const intl = getIntl(props.lang || 'en');
 
   return (
-    <Html>
+    <Html lang={props.lang || 'en'}>
       <Head />
       <Preview>{intl.formatMessage({ id: 'phoneChanged.preview' })}</Preview>
       <Body
@@ -56,7 +38,7 @@ export const PhoneChangedEmail = ({
             backgroundColor: '#ffffff',
           }}
         >
-          {/* <EmailHeader /> */}
+          <EmailHeader logo={appInfo?.logo} appName={appInfo?.name} />
 
           <Section style={{ textAlign: 'center', marginBottom: '28px' }}>
             <Heading
@@ -144,52 +126,7 @@ export const PhoneChangedEmail = ({
                     fontStyle: 'italic',
                   }}
                 >
-                  {oldPhone}
-                </Text>
-              </Section>
-
-              <Section style={{ marginBottom: '12px' }}>
-                <Text
-                  style={{
-                    color: '#92400e',
-                    fontSize: '13px',
-                    fontWeight: '600',
-                    margin: '0 0 4px 0',
-                  }}
-                >
-                  {intl.formatMessage({ id: 'phoneChanged.newPhone' })}:
-                </Text>
-                <Text
-                  style={{
-                    color: '#92400e',
-                    fontSize: '14px',
-                    margin: '0 0 12px 0',
-                    fontWeight: '500',
-                  }}
-                >
-                  {newPhone}
-                </Text>
-              </Section>
-
-              <Section style={{ marginBottom: '12px' }}>
-                <Text
-                  style={{
-                    color: '#92400e',
-                    fontSize: '13px',
-                    fontWeight: '600',
-                    margin: '0 0 4px 0',
-                  }}
-                >
-                  {intl.formatMessage({ id: 'phoneChanged.changeTime' })}:
-                </Text>
-                <Text
-                  style={{
-                    color: '#92400e',
-                    fontSize: '13px',
-                    margin: '0 0 12px 0',
-                  }}
-                >
-                  {changeTime}
+                  {updateTime}
                 </Text>
               </Section>
 
@@ -253,7 +190,7 @@ export const PhoneChangedEmail = ({
           <Section style={{ textAlign: 'center', marginBottom: '28px' }}>
             <EmailButton
               title={intl.formatMessage({ id: 'phoneChanged.buttonText' })}
-              link={accountSettingsUrl}
+              link={url}
               variant="primary"
               size="medium"
             />
@@ -272,7 +209,7 @@ export const PhoneChangedEmail = ({
             </Text>
           </Section>
 
-          {/* <EmailFooter lang={lang} /> */}
+          <EmailFooter {...appInfo!} />
         </Container>
       </Body>
     </Html>
