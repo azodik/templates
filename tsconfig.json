@@ -11,15 +11,24 @@
     "isolatedModules": true,
     "lib": ["es2022", "DOM", "DOM.Iterable"],
     "moduleDetection": "force",
-    "moduleResolution": "bundler",
-    "module": "ESNext",
+    "moduleResolution": "node",
+    "module": "CommonJS",
     "noUncheckedIndexedAccess": true,
     "resolveJsonModule": true,
     "skipLibCheck": true,
     "strict": true,
     "target": "ES2022",
-    "jsx": "react-jsx"
+    "jsx": "react-jsx",
+    "allowImportingTsExtensions": false
   },
-  "include": ["."],
-  "exclude": ["dist", "build", "node_modules"]
+  "include": ["src/**/*"],
+  "exclude": [
+    "dist",
+    "build",
+    "node_modules",
+    "out",
+    ".react-email",
+    "**/*.test.ts",
+    "**/*.test.tsx"
+  ]
 }

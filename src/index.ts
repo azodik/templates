@@ -7,8 +7,8 @@ import { getIntl } from './i18n';
 import { ProfileUpdatedEmail } from './templates/profile-updated';
 import { LoginAlertEmail } from './templates/login-alert';
 import { PasswordChangedEmail } from './templates/password-changed';
-// import { EmailChangedEmail } from './templates/email-changed';
-// import { PhoneChangedEmail } from './templates/phone-changed';
+import { EmailChangedEmail } from './templates/email-changed';
+import { PhoneChangedEmail } from './templates/phone-changed';
 
 export const getSubject = (template: EmailTemplate, lang: TemplateLanguage) => {
   const intl = getIntl(lang);
@@ -107,22 +107,34 @@ export const getTemplate = async (opts: GetTemplate) => {
           userAgent: variables?.userAgent,
         }),
       );
-    // case 'email-changed':
-    //   return await render(
-    //     EmailChangedEmail({
-    //       name: variables?.name,
-    //       lang: lang,
-    //     })
-    //   );
 
-    // case 'phone-changed':
-    //   return await render(
-    //     PhoneChangedEmail({
-    //       name: variables?.name,
-    //       lang: lang,
-    //       appName: variables?.appName,
-    //     })
-    //   );
+    case 'email-changed':
+      return await render(
+        EmailChangedEmail({
+          name: variables?.name,
+          lang: lang,
+          oldEmail: variables?.oldEmail,
+          newEmail: variables?.newEmail,
+          changeTime: variables?.changeTime,
+          ipAddress: variables?.ipAddress,
+          location: variables?.location,
+          accountSettingsUrl: variables?.accountSettingsUrl,
+        }),
+      );
+
+    case 'phone-changed':
+      return await render(
+        PhoneChangedEmail({
+          name: variables?.name,
+          lang: lang,
+          oldPhone: variables?.oldPhone,
+          newPhone: variables?.newPhone,
+          changeTime: variables?.changeTime,
+          ipAddress: variables?.ipAddress,
+          location: variables?.location,
+          accountSettingsUrl: variables?.accountSettingsUrl,
+        }),
+      );
 
     default:
       throw new Error(`Template ${template} not supported.`);
